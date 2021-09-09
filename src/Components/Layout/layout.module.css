@@ -1,0 +1,19 @@
+.Nav
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #253b80;
+}
+
+.Links
+{
+    display: inline;
+    color: white;
+
+}
+
+.Logo
+{
+    width:8rem;
+}

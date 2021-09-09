@@ -1,28 +1,64 @@
 import * as actionTypes from './actions';
 
 const initialState = {
-    persons: []
+    email: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    role: '',
+    src: '',
+    gender: '',
+    id: '',
+    isAuthenticated: false
 };
 
-const reducer = ( state = initialState, action ) => {
-    switch ( action.type ) {
-        case actionTypes.ADD_PERSON:
-            const newPerson = {
-                id: Math.random(), // not really unique but good enough here!
-                name: action.personData.name,
-                age: action.personData.age
-            }
+
+const reducer = (state = initialState, action) => {
+    switch (action.type) {
+        case actionTypes.Login:
+
             return {
                 ...state,
-                persons: state.persons.concat( newPerson )
+                email: action.respons.email,
+                password: action.respons.pasword,
+                firstName: action.respons.firstName,
+                lastName: action.respons.lastName,
+                role: action.respons.role,
+                src: action.respons.src,
+                gender: action.respons.gender,
+                id: action.respons._id,
+                isAuthenticated: true
             }
-        case actionTypes.REMOVE_PERSON:
+        case actionTypes.SignUp:
             return {
                 ...state,
-                persons: state.persons.filter(person => person.id !== action.personId)
+                email: action.respons.email,
+                password: action.respons.pasword,
+                firstName: action.respons.firstName,
+                lastName: action.respons.lastName,
+                role: action.respons.role,
+                src: action.respons.src,
+                gender: action.respons.gender,
+                id: action.respons._id,
+                isAuthenticated: true
+            }
+        case actionTypes.LogOut:
+            return {
+                ...state,
+                email: '',
+                password: '',
+                firstName: '',
+                lastName: '',
+                role: '',
+                src: '',
+                gender: '',
+                id: '',
+                isAuthenticated: false
             }
     }
     return state;
 };
+
+
 
 export default reducer;

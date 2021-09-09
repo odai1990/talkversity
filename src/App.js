@@ -1,72 +1,81 @@
+import React, { Component } from 'react';
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import Header from './Components/Layout/header';
+import Footer from './Components/Layout/footer';
+import Courses from './Components/Courses/courses';
+import LoginTabs from './Components/Auth/Container/loginTabs'
+import Grid from '@material-ui/core/Grid';
+import Background from './Assets/Images/loginBackground.jpg'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 
-function App() {
-  return (
-   <div className="">wwwww</div>
-  );
+
+const StyleMain = {
+  backgroundImage: "url(" + Background + ")",
+  backgroundSize: 'cover',
+  backgroundAttachment: 'fixed',
+}
+const StyleFooter = {
+  padding: 0
+
 }
 
-export default App;
 
 
+class App extends Component {
+  componentDidMount() {
+    if (localStorage.getItem('data')) {
+      this.props.onTryAutoSignup();
+      this.props.history.push('/');
+    }   
+  }
 
-// import React, { Component } from 'react';
-// import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
-// import { connect } from 'react-redux';
+  render() {
+    console.log(this.props.isAuthenticated, this.props.email)
 
-// import Layout from './hoc/Layout/Layout';
-// import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
-// import Checkout from './containers/Checkout/Checkout';
-// import Orders from './containers/Orders/Orders';
-// import Auth from './containers/Auth/Auth';
-// import Logout from './containers/Auth/Logout/Logout';
-// import * as actions from './store/actions/index';
+    let routes = (
+      <Switch>
+        
+        <Route path="/auth" exact component={LoginTabs} {...this.props} />
+        <Redirect to="/auth" />
+      </Switch>
+    );
 
-// class App extends Component {
-//   componentDidMount () {
-//     this.props.onTryAutoSignup();
-//   }
+    if (this.props.isAuthenticated) {
+      routes = (
+        <Switch>
+          <Route path="/" exact component={Courses} />
+          <Redirect to="/" />
+        </Switch>
+      );
+    }
+    console.log(routes)
+    return (
+      <div>
+        <Grid container spacing={3} direction="column">
+          <Grid item xs={12} ><Header /> <ToastContainer /></Grid>
+          <Grid item xs={12} style={StyleMain} >  {routes}</Grid>
+          <Grid item xs={12} style={StyleFooter}>   <Footer /></Grid>
+        </Grid>
+      </div>
+    );
+  }
+}
 
-//   render () {
-//     let routes = (
-//       <Switch>
-//         <Route path="/auth" component={Auth} />      
-//         <Redirect to="/" />
-//       </Switch>
-//     );
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.isAuthenticated,
+    email: state.email,
 
-//     if ( this.props.isAuthenticated ) {
-//       routes = (
-//         <Switch>
-//           <Route path="/checkout" component={Checkout} />
-//           <Route path="/orders" component={Orders} />
-//           <Route path="/logout" component={Logout} />
-//           <Route path="/" exact component={BurgerBuilder} />
-//           <Redirect to="/" />
-//         </Switch>
-//       );
-//     }
+  };
+};
 
-//     return (
-//       <div>
-//         <Layout>
-//           {routes}
-//         </Layout>
-//       </div>
-//     );
-//   }
-// }
+const mapDispatchToProps = dispatch => {
+  return {
+    onTryAutoSignup: () => dispatch({ respons: JSON.parse(window.localStorage.getItem('data')), type: 'Login' })
+  };
+};
 
-// const mapStateToProps = state => {
-//   return {
-//     isAuthenticated: state.auth.token !== null
-//   };
-// };
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     onTryAutoSignup: () => dispatch( actions.authCheckState() )
-//   };
-// };
-
-// export default withRouter( connect( mapStateToProps, mapDispatchToProps )( App ) );
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
