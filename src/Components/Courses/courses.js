@@ -17,6 +17,14 @@ import { Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import Grid from '@material-ui/core/Grid';
 const useStyles = makeStyles({
+  imgHeader:
+  {
+    width: '100%',
+    height: '31rem',
+    margin: '0 0 -4rem',
+    padding: '0',
+},
+  
   card:
   {
     width: '100%'
@@ -179,6 +187,9 @@ const Courses = () => {
         setHandleOpen={setHandleOpen}
       />
 
+      <Grid item container xs={12} >
+      <img className={classes.imgHeader} src='https://www.interpermhealthcare.uk/wp-content/uploads/2020/06/Trainingcourses.jpg'/>
+      </Grid>
       <Grid item container xs={12} justifyContent='center' className={classes.dialog} >
         {data.role === '1' ? <FullScreenDialog Reload={getDatahandler} /> : null}
       </Grid>
@@ -196,8 +207,11 @@ const Courses = () => {
                     title="Contemplative Reptile"
                   />
                   <CardContent className={classes.cardDesc}>
-                    <Typography gutterBottom variant="h5" component="h2">
+                    <Typography gutterBottom variant="h7" component="h2">
                       {info.title}
+                    </Typography>
+                    <Typography gutterBottom variant="body2" component="p">
+                      ${info.price}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
                       {info.pref}
