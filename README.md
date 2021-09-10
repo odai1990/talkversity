@@ -4,10 +4,10 @@
 
 ## How to run it
 
-1- you need to install npm .
-1- open tow terminals .
-1- first terminal type in it --> npm strat .
-1- scond one type in it --> nodemon server .
+1-you need to install npm .
+1-open tow terminals .
+1-first terminal type in it --> npm strat .
+1-scond one type in it --> nodemon server .
 
 **make sure you have nodemon npm installed**
 
