@@ -3,14 +3,14 @@ import { alpha, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import InputBase from '@material-ui/core/InputBase';
+// import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
+// import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Logo from '../../Assets/Images/logo.png'
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Avatar from '@material-ui/core/Avatar';
 
 
@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Header = (props) => {
-  
+
   const dispatch = useDispatch();
 
   const data = useSelector(state => state);
@@ -103,7 +103,7 @@ const Header = (props) => {
     setAnchorEl(null);
     handleMobileMenuClose();
     window.localStorage.removeItem('data')
-    
+
     dispatch({ type: 'LogOut' })
   };
 
@@ -125,7 +125,7 @@ const Header = (props) => {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>LogOut</MenuItem>
-   
+
     </Menu>
   );
 
@@ -143,21 +143,15 @@ const Header = (props) => {
       keepMounted
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
+      onClose={handleMobileMenuClose}>
       <MenuItem>
-
-
       </MenuItem>
       <MenuItem>
-
-
       </MenuItem>
       <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
+        {/* <IconButton aria-label="show 11 new notifications" color="inherit">
           Corsues
-        </IconButton>
-
+        </IconButton> */}
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -180,7 +174,6 @@ const Header = (props) => {
     <div className={classes.grow}>
       <AppBar position="fixed">
         <Toolbar>
-
           <img src={Logo} alt="Logo" className={classes.images} />
 
           {/* <div className={classes.search}>
@@ -196,42 +189,32 @@ const Header = (props) => {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div> */}
-          {data.isAuthenticated? <>
-          <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
-
-
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              Courses
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-
-
-              <Avatar alt="Remy Sharp" src={data.src} />
-
-            </IconButton>
-
-          </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-
-
-              <MenuIcon />
-            </IconButton>
-          </div></>:null}
+          {data.isAuthenticated ? <>
+            <div className={classes.grow} />
+            <div className={classes.sectionDesktop}>
+              {/* <IconButton aria-label="show 17 new notifications" color="inherit">
+                Courses
+              </IconButton> */}
+              <IconButton
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit" >
+                <Avatar alt="Remy Sharp" src={data.src} />
+              </IconButton>
+            </div>
+            <div className={classes.sectionMobile}>
+              <IconButton
+                aria-label="show more"
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                onClick={handleMobileMenuOpen}
+                color="inherit" >
+                <MenuIcon />
+              </IconButton>
+            </div></> : null}
         </Toolbar>
       </AppBar>
       {renderMobileMenu}

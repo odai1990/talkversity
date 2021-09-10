@@ -3,6 +3,7 @@ require('./models/db');
 
 const bodyParser = require('body-parser');
 const user = require('./controllers/users');
+const course = require('./controllers/courses');
 var express = require('express');
 var app = express();
 
@@ -17,3 +18,4 @@ var cors = require('cors');
 
 app.use(cors());
 app.use('/user', user, (err, doc) => {});
+app.use('/courses', course, (err, doc) => {});

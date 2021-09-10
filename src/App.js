@@ -16,6 +16,7 @@ const StyleMain = {
   backgroundImage: "url(" + Background + ")",
   backgroundSize: 'cover',
   backgroundAttachment: 'fixed',
+  minHeight: "100vh"
 }
 const StyleFooter = {
   padding: 0
@@ -29,15 +30,14 @@ class App extends Component {
     if (localStorage.getItem('data')) {
       this.props.onTryAutoSignup();
       this.props.history.push('/');
-    }   
+    }
   }
 
-  render() {
-    console.log(this.props.isAuthenticated, this.props.email)
+  render() {   
 
     let routes = (
       <Switch>
-        
+
         <Route path="/auth" exact component={LoginTabs} {...this.props} />
         <Redirect to="/auth" />
       </Switch>
@@ -51,12 +51,12 @@ class App extends Component {
         </Switch>
       );
     }
-    console.log(routes)
+    console.log(this.props.location.pathname)
     return (
       <div>
-        <Grid container spacing={3} direction="column">
+        <Grid container spacing={2} direction="column">
           <Grid item xs={12} ><Header /> <ToastContainer /></Grid>
-          <Grid item xs={12} style={StyleMain} >  {routes}</Grid>
+          <Grid item xs={12} style={this.props.location.pathname === '/auth' ? StyleMain : { minHeight: "100vh" }} >  {routes}</Grid>
           <Grid item xs={12} style={StyleFooter}>   <Footer /></Grid>
         </Grid>
       </div>

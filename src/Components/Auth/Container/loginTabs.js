@@ -45,7 +45,7 @@ function a11yProps(index) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  root: {    
+  root: {
     width: '90%',
     margin: '19rem auto',
     padding: '0'

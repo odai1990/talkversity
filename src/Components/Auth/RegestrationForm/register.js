@@ -1,13 +1,14 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import MenuItem from '@material-ui/core/MenuItem';
+import AddIcon from "@material-ui/icons/Add";
+import { Fab, Button } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { withRouter } from 'react-router-dom';
 import { signUp } from '../../../Store/auth'
 import { toast } from 'react-toastify';
-import MenuItem from '@material-ui/core/MenuItem';
-import AddIcon from "@material-ui/icons/Add";
-import { Fab, Button } from "@material-ui/core";
+
 
 const Register = (props) => {
   const notify = (type) => toast.error(type, {
@@ -51,7 +52,7 @@ const Register = (props) => {
 
   const handleChange = (prop) => (event) => {
 
-    if (prop == 'file')
+    if (prop === 'file')
       setValues({ ...values, [prop]: event.target.files[0] });
     else
       setValues({ ...values, [prop]: event.target.value });
@@ -66,19 +67,18 @@ const Register = (props) => {
       || values.firsName === '' || values.lastName === ''
       || values.gender === '' || values.number === ''
       || values.file === '' || values.confirmPassword === '')
-    
-        notify('Please Fill All Fileds!');
-      
+
+      notify('Please Fill All Fileds!');
+
     else {
-      if (values.password !== values.confirmPassword)
-      {
-      notify('Password Not Match!');
-      return;
+      if (values.password !== values.confirmPassword) {
+        notify('Password Not Match!');
+        return;
       }
 
-   
+
       const respons = await signUp(values)
-      if (respons == 'Invalied Email!')
+      if (respons === 'Invalied Email!')
         notify('Invalied Email!')
       else {
         dispatch({ respons: respons, type: 'SignUp' })

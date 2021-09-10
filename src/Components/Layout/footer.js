@@ -57,12 +57,12 @@ const Footer = () => {
                         <img src={Logo} alt="Logo" className={classes.img} />
                     </Grid>
                     <Grid item sm={12} md={2}>
-                        <InstagramIcon className={classes.images}/>
+                        <InstagramIcon className={classes.images} />
                         <YouTubeIcon className={classes.images} />
                         <TwitterIcon className={classes.images} />
                         <FacebookIcon className={classes.images} />
                     </Grid>
-                </Grid>          
+                </Grid>
             </AppBar>
         </div>
     );
