@@ -9,3 +9,4 @@ mongosse.connect('mongodb+srv://odai22odai78:ttxjWLjtk6VbNHok@cluster0.vufe9.mon
 });
 
 require("./user");
+require("./course");

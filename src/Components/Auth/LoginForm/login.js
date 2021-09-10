@@ -32,7 +32,7 @@ const Login = (props) => {
   };
   const loginHandler = async () => {
 
-    if (values.email == '' || values.password == '')
+    if (values.email === '' || values.password === '')
       notify()
     else {
       const respons = await auth(values.email, values.password)
