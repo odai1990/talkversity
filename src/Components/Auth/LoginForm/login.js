@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 
 
 const Login = (props) => {
-  const notify = () => toast.error('Please Fill All Fileds!', {
+  const notify = (type) => toast.error(type, {
     position: "top-right",
     autoClose: 5000,
     hideProgressBar: true,
@@ -33,12 +33,18 @@ const Login = (props) => {
   const loginHandler = async () => {
 
     if (values.email === '' || values.password === '')
-      notify()
+      notify('Please Fill All Fileds!')
     else {
       const respons = await auth(values.email, values.password)
-
+      if (respons === 'Email or Password is InCorrect!' || respons === 'Somthing Went Wrong!') {
+        notify(respons)
+    
+      } else {
+        notify(respons)
       dispatch({ respons: respons, type: 'Login' })
       props.history.push('/')
+      }
+     
     }
   }
 

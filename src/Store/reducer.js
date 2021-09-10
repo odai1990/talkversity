@@ -30,6 +30,7 @@ const reducer = (state = initialState, action) => {
                 isAuthenticated: true
             }
         case actionTypes.SignUp:
+            console.log(action.respons)
             return {
                 ...state,
                 email: action.respons.email,
