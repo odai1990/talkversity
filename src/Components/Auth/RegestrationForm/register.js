@@ -61,8 +61,9 @@ const Register = (props) => {
 
 
 
-  const signupHandler = async () => {
-
+  const signupHandler = async (event) => {
+   
+    event.preventDefault();
     if (values.email === '' || values.password === ''
       || values.firsName === '' || values.lastName === ''
       || values.gender === '' || values.number === ''
@@ -78,9 +79,11 @@ const Register = (props) => {
 
 
       const respons = await signUp(values)
+      console.log('gggggggggggggggg',respons)
       if (respons === 'Invalied Email!')
         notify('Invalied Email!')
       else {
+
         dispatch({ respons: respons, type: 'SignUp' })
         props.history.push('/')
       }

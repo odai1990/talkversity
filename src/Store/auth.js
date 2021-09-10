@@ -9,8 +9,17 @@ export const auth = async (email, password) => {
   })
 
   const respons = await call.then(respons => respons.data)
-  window.localStorage.setItem('data', JSON.stringify(respons))
-  return respons;
+
+ 
+
+
+  if (respons === 'Email or Password is InCorrect!' || respons === 'Somthing Went Wrong!') {
+    return respons;
+
+  } else {
+    window.localStorage.setItem('data', JSON.stringify(respons))
+    return respons;
+  }
 
 };
 
